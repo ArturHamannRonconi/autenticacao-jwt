@@ -1,11 +1,10 @@
-import { Router } from 'express'
-import passport from 'passport'
+import passport, { AuthenticateOptions } from 'passport'
 
 import strategy from './strategy'
 
-const pass = Router()
-
 passport.use(strategy())
-pass.use(passport.initialize())
 
-export default () => ({ authenticate: passport.authenticate, strategy: pass })
+export default () => ({
+  authenticate: (options: AuthenticateOptions) => passport.authenticate('jwt', options),
+  initialize: () => passport.initialize()
+})
