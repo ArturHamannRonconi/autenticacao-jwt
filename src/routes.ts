@@ -8,7 +8,7 @@ const routes = Router()
 
 
 routes.route('/login')
-  .get((req, res) => res.json({ message: 'Redirecionado' }))
+  .get((req, res) => res.render('login'))
   .post((req, res) => {
     const { email, password } = req.body
   
@@ -30,8 +30,8 @@ routes.route('/login')
 
 routes.route('/users')
   .get(
-    passport().authenticate({ failureRedirect: '/login',session: false }),
-    (req, res) => res.json({ user_id: 1 })
+    passport().authenticate({ failureRedirect: '/login', session: false }),
+    (req, res) => res.render('profile')
   )
 
 export default routes
